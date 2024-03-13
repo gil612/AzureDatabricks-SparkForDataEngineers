@@ -43,3 +43,13 @@ I'll be doing a project on building a Cloud Data platform for reporting and doin
   <img src="https://i.imgur.com/rDstP6P.png" width="340"/>
   <img src="https://i.imgur.com/DC49nfY.png" width="240"/>
 </p>
+
+<p align="center">
+  <img src="https://i.imgur.com/Y9AriIe.png" width="500"/>
+  <img src="https://i.imgur.com/TjueTrl.png" width="500"/>
+</p>
+
+<p align="center">
+  <img src="https://i.imgur.com/gk6QLVo.png" width="640"/>
+</p>
+
