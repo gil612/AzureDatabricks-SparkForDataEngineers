@@ -71,7 +71,8 @@ qualifying_final_df = add_ingestion_date(qualifying_renamed_df)
 
 # COMMAND ----------
 
-qualifying_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.qualifying")
+# qualifying_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.qualifying")
+overwrite_partition(qualifying_final_df, 'f1_processed', 'qualifying', 'race_id')
 
 # COMMAND ----------
 

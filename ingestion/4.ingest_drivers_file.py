@@ -1,4 +1,40 @@
 # Databricks notebook source
+spark.read.json("/mnt/formula1dl612/raw/2021-03-21/results.json").createOrReplaceTempView("results_cutover")
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT raceID, count(1)
+# MAGIC FROM results_cutover
+# MAGIC GROUP BY raceId
+# MAGIC ORDER BY raceId DESC;
+
+# COMMAND ----------
+
+spark.read.json("/mnt/formula1dl612/raw/2021-03-28/results.json").createOrReplaceTempView("results_w1")
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT raceID, count(1)
+# MAGIC FROM results_w1
+# MAGIC GROUP BY raceId
+# MAGIC ORDER BY raceId DESC;
+
+# COMMAND ----------
+
+spark.read.json("/mnt/formula1dl612/raw/2021-04-18/results.json").createOrReplaceTempView("results_w2")
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT raceID, count(1)
+# MAGIC FROM results_w2
+# MAGIC GROUP BY raceId
+# MAGIC ORDER BY raceId DESC;
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # Ingest drivers.json file
 # MAGIC
@@ -12,6 +48,11 @@
 
 dbutils.widgets.text("p_data_source", "")
 v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
+dbutils.widgets.text("p_file_date", "2021-03-21")
+v_file_date = dbutils.widgets.get("p_file_date")
 
 # COMMAND ----------
 
@@ -47,7 +88,7 @@ drivers_schema = StructType(fields = [StructField("driverId", IntegerType(), Fal
 # https://spark.apache.org/docs/3.1.2/api/python/reference/api/pyspark.sql.DataFrameReader.json.html
 drivers_df = spark.read \
 .schema(drivers_schema) \
-.json(f"{raw_folder_path}/drivers.json")
+.json(f"{raw_folder_path}/{v_file_date}/drivers.json")
 
 # COMMAND ----------
 
@@ -63,7 +104,11 @@ from pyspark.sql.functions import col, concat, lit
 
 # COMMAND ----------
 
-drivers_renamed_df = drivers_df.withColumnRenamed("driverId", "driver_id").withColumnRenamed("driverRef", "driver_ref").withColumn("data_source", lit(v_data_source)).withColumn("name",concat(col("name.forename"), lit(" "), col("name.surname")))
+drivers_renamed_df = drivers_df.withColumnRenamed("driverId", "driver_id") \
+.withColumnRenamed("driverRef", "driver_ref") \
+.withColumn("data_source", lit(v_data_source)) \
+.withColumn("file_date", lit(v_file_date)) \
+.withColumn("name",concat(col("name.forename"), lit(" "), col("name.surname")))
 
 # COMMAND ----------
 
