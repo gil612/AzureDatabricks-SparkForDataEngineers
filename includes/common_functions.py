@@ -40,13 +40,3 @@ def column_to_list (path, column_name, v_file_date):
     column_value_list = [row[column_name] for row in row_list]
     output_df = spark.read.parquet(path).filter(col (column_name).isin(column_value_list))
     return output_df
-
-# COMMAND ----------
-
-def f1(path):
-    return spark.read.parquet(path)
-
-
-# COMMAND ----------
-
-
