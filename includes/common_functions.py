@@ -1,5 +1,5 @@
 # Databricks notebook source
-from pyspark.sql.functions import current_timestamp
+from pyspark.sql.functions import current_timestamp, col
 
 # COMMAND ----------
 
@@ -27,6 +27,25 @@ def overwrite_partition(input_df, db_name, table_name, partition_column):
     output_df.write.mode("overwrite").insertInto(f"{db_name}.{table_name}")
   else:
     output_df.write.mode("overwrite").partitionBy(partition_column).format("parquet").saveAsTable(f"{db_name}.{table_name}")
+
+# COMMAND ----------
+
+def column_to_list (path, column_name, v_file_date):
+    # Use collect() to get a list
+    row_list = spark.read.parquet(path) \
+    .filter(f"file_date = '{v_file_date}'") \
+    .select(column_name) \
+    .distinct()\
+    .collect()
+    column_value_list = [row[column_name] for row in row_list]
+    output_df = spark.read.parquet(path).filter(col (column_name).isin(column_value_list))
+    return output_df
+
+# COMMAND ----------
+
+def f1(path):
+    return spark.read.parquet(path)
+
 
 # COMMAND ----------
 

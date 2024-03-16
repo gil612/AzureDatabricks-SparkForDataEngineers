@@ -8,19 +8,25 @@
 
 # COMMAND ----------
 
-display(spark.read.parquet(f"{presentation_folder_path}/race_results"))
+# MAGIC %run "../includes/common_functions"
 
 # COMMAND ----------
 
-race_results_df = spark.read.parquet(f"{presentation_folder_path}/race_results")
+dbutils.widgets.text("p_file_date", "2021-03-21")
+v_file_date = dbutils.widgets.get("p_file_date")
+v_file_date
 
 # COMMAND ----------
 
+race_year_list = []
+for race_year in race_results_list:
+    race_year_list.append(race_year.race_year)
+
+# COMMAND ----------
+
+path = f"{presentation_folder_path}/race_results"
+race_results_df = column_to_list(path, 'race_year',v_file_date)
 display(race_results_df)
-
-# COMMAND ----------
-
-race_results_df.printSchema()
 
 # COMMAND ----------
 
@@ -45,17 +51,10 @@ final_df = constructor_standings_df.withColumn("rank", rank().over(constructor_r
 
 # COMMAND ----------
 
-display(final_df.filter("race_year = 2020"))
+# display(final_df.filter("race_year = 2020"))
 
 # COMMAND ----------
 
 # final_df.write.mode("overwrite").parquet(f"{presentation_folder_path}/constructor_standings")
-final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_presentation.constructor_standings")
-
-# COMMAND ----------
-
-presentation_folder_path
-
-# COMMAND ----------
-
-
+# final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_presentation.constructor_standings")
+overwrite_partition(final_df, 'f1_presentation', 'constructor_standings', 'race_year')

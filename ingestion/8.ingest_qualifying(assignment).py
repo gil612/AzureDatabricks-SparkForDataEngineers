@@ -10,6 +10,11 @@ v_data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_file_date", "2021-03-21")
+v_file_date = dbutils.widgets.get("p_file_date")
+
+# COMMAND ----------
+
 # MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
@@ -38,7 +43,7 @@ qualifying_schema = StructType(fields = [StructField("qualifyId", IntegerType(),
 qualifying_df = spark.read \
 .schema(qualifying_schema) \
 .option("multiLine", True) \
-.json(f"{raw_folder_path}/qualifying")
+.json(f"{raw_folder_path}/{v_file_date}/qualifying")
 
 # COMMAND ----------
 
@@ -62,7 +67,8 @@ qualifying_renamed_df = qualifying_df.withColumnRenamed("raceId","race_id") \
 .withColumnRenamed("driverId", "driver_id") \
 .withColumnRenamed("qualifyId","qualify_id") \
 .withColumnRenamed("constructorId","constructor_id") \
-.withColumn("data_source", lit(v_data_source))
+.withColumn("data_source", lit(v_data_source)) \
+.withColumn("file_date", lit(v_file_date))
 display(qualifying_renamed_df)
 
 # COMMAND ----------

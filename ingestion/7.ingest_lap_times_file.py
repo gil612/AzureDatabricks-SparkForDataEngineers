@@ -9,6 +9,11 @@ v_data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_file_date", "2021-03-28")
+v_file_date = dbutils.widgets.get("p_file_date")
+
+# COMMAND ----------
+
 # MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
@@ -33,7 +38,7 @@ lap_times_schema = StructType(fields = [StructField("raceId", IntegerType(), Fal
 
 lap_times_df = spark.read \
 .schema(lap_times_schema) \
-.csv(f"{raw_folder_path}/lap_times")
+.csv(f"{raw_folder_path}/{v_file_date}/lap_times")
 
 # COMMAND ----------
 
@@ -55,7 +60,8 @@ from pyspark.sql.functions import lit
 
 lap_times_renamed_df = lap_times_df.withColumnRenamed("raceId","race_id") \
 .withColumnRenamed("driverId", "driver_id") \
-.withColumn("data_source", lit(v_data_source))
+.withColumn("data_source", lit(v_data_source)) \
+.withColumn("file_date", lit(v_file_date))
 display(lap_times_renamed_df)
 
 # COMMAND ----------
