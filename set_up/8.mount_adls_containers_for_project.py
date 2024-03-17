@@ -4,10 +4,6 @@
 
 # COMMAND ----------
 
-
-
-# COMMAND ----------
-
 def mount_adls(storage_account_name, container_name):
     client_id = dbutils.secrets.get(scope = 'formula1-scope', key = 'formula1-app-client-id')
     tenant_id = dbutils.secrets.get(scope = 'formula1-scope', key = 'formula1-app-tenant-id')
