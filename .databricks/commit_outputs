@@ -16,3 +16,10 @@
  
 ingestion/10.delta_lake_demo.ipynb
 ingestion/1.ingest_circuits_file.ipynb
+set_up/8.mount_adls_containers_for_project.ipynb
+ingestion/5.ingest_results_file.ipynb
+ingestion/8.ingest_qualifying(assignment).ipynb
+analysis/3.viz_dominant_drivers.ipynb
+trans/Assignment_Join_race_results.ipynb
+trans/3.constructor_standings.ipynb
+trans/4.calculated_race_results.ipynb

@@ -125,7 +125,7 @@ display(drivers_dropped_df.head(5))
 
 # COMMAND ----------
 
-drivers_dropped_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.drivers")
+drivers_dropped_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.drivers")
 
 # COMMAND ----------
 

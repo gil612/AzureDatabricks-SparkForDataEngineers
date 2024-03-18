@@ -88,21 +88,12 @@ display(races_final_df.head(5))
 # COMMAND ----------
 
 # races_final.write.mode("overwrite").parquet("/mnt/formula1dl612/processed/races")
-races_final_df.write.mode("overwrite").partitionBy('race_year').format("parquet").saveAsTable("f1_processed.races")
+races_final_df.write.mode("overwrite").partitionBy('race_year').format("delta").saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC SELECT * FROM f1_processed.races;
-
-# COMMAND ----------
-
-# MAGIC %fs
-# MAGIC ls /mnt/formula1dl612/processed/races
-
-# COMMAND ----------
-
-display(spark.read.parquet(f"{processed_folder_path}/races").head(5))
 
 # COMMAND ----------
 

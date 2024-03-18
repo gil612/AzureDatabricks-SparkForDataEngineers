@@ -8,14 +8,6 @@ DESC DATABASE f1_processed;
 
 -- COMMAND ----------
 
-SELECT 
-    *
-FROM
-    f1_processed.circuits;
-
-
--- COMMAND ----------
-
 drop table f1_processed.circuits;
 
 -- COMMAND ----------

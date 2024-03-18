@@ -71,7 +71,12 @@ lap_times_final_df = add_ingestion_date(lap_times_renamed_df)
 # COMMAND ----------
 
 # lap_times_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.lap_times")
-overwrite_partition(lap_times_final_df, 'f1_processed', 'lap_times', 'race_id')
+# overwrite_partition(lap_times_final_df, 'f1_processed', 'lap_times', 'race_id')
+
+# COMMAND ----------
+
+merge_condition = "tgt.driver_id = src.driver_id AND tgt.race_id = src.race_id AND tgt.lap = src.lap"
+merge_delta_data(lap_times_final_df, "f1_processed", 'lap_times', processed_folder_path, merge_condition, 'race_id')
 
 # COMMAND ----------
 
@@ -80,8 +85,13 @@ overwrite_partition(lap_times_final_df, 'f1_processed', 'lap_times', 'race_id')
 
 # COMMAND ----------
 
-display(spark.read.parquet(f"{processed_folder_path}/lap_times"))
+dbutils.notebook.exit("Success")
 
 # COMMAND ----------
 
-dbutils.notebook.exit("Success")
+# %sql
+# drop table f1_processed.lap_times
+
+# COMMAND ----------
+
+

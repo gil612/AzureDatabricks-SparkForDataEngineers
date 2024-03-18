@@ -86,16 +86,12 @@ display(constructors_final_df)
 
 # COMMAND ----------
 
-constructors_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.constructors")
+constructors_final_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.constructors")
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC SELECT * FROM f1_processed.constructors;
-
-# COMMAND ----------
-
-display(spark.read.parquet(f"{processed_folder_path}/constructors").head(5))
 
 # COMMAND ----------
 

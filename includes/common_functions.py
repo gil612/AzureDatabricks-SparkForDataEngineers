@@ -32,11 +32,33 @@ def overwrite_partition(input_df, db_name, table_name, partition_column):
 
 def column_to_list (path, column_name, v_file_date):
     # Use collect() to get a list
-    row_list = spark.read.parquet(path) \
+    row_list = spark.read.format("delta").load(path) \
     .filter(f"file_date = '{v_file_date}'") \
     .select(column_name) \
     .distinct()\
     .collect()
     column_value_list = [row[column_name] for row in row_list]
-    output_df = spark.read.parquet(path).filter(col (column_name).isin(column_value_list))
+    output_df = spark.read.format("delta").load(path).filter(col (column_name).isin(column_value_list))
     return output_df
+
+# COMMAND ----------
+
+def merge_delta_data(input_df, db_name, table_name, folder_path, merge_condition, partition_column):
+    spark.conf.set("spark.databricks.optimizer.dynamicPartitionPruning", "true")
+    from delta.tables import DeltaTable
+    if (spark._jsparkSession.catalog().tableExists(f"{db_name}.{table_name}")):
+        deltaTable = DeltaTable.forPath(spark, f"{folder_path}/{table_name}")
+        deltaTable.alias('tgt') \
+            .merge(
+                input_df.alias('src'),
+        merge_condition
+    ) \
+    .whenMatchedUpdateAll()\
+    .whenNotMatchedInsertAll() \
+    .execute()
+    else:
+        input_df.write.mode("overwrite").partitionBy(partition_column).format("delta").saveAsTable(f"{db_name}.{table_name}") 
+
+# COMMAND ----------
+
+
