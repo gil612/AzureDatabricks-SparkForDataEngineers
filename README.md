@@ -6,6 +6,7 @@ Azure Databricks is a unified, open analytics platform for building, deploying, 
 I'll be doing a project on building a Cloud Data platform for reporting and doing analysis of the data from Formula One Motorsport.
 ## Formula1
 <p align="center">
+  <a href="https://raw.githubusercontent.com/gil612/AzureDatabricks-SparkForDataEngineers/main/f1db_user_guide.txt"/>
   <img src="https://i.imgur.com/BTzap2q.png" width="1280"/>
 </p>
 
