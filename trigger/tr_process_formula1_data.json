@@ -3,7 +3,17 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_process_formula1_data",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"p_window_end_date": "@trigger().outputs.windowEndTime"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
