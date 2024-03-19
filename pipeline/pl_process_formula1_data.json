@@ -46,7 +46,10 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"p_window_end_date": "@pipeline().parameters.p_window_end_date"
+						"p_window_end_date": {
+							"value": "@pipeline().parameters.p_window_end_date",
+							"type": "Expression"
+						}
 					}
 				}
 			}
@@ -54,7 +57,8 @@
 		"concurrency": 1,
 		"parameters": {
 			"p_window_end_date": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2021-03-21"
 			}
 		},
 		"annotations": []
