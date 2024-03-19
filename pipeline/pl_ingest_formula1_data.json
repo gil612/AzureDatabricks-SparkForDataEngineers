@@ -1,0 +1,261 @@
+{
+	"name": "pl_ingest_formula1_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Ingest Circuits File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/1.ingest_circuits_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Races File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/Data Ingestion - Races (Assignment)",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Constructors File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/3.ingest_constructors_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Results File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/5.ingest_results_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Drivers File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/4.ingest_drivers_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Qualifying File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/8.ingest_qualifying(assignment)",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Lap Times File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/7.ingest_lap_times_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest Pit Stops File",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/first repo/AzureDatabricks-SparkForDataEngineers/ingestion/6.ingest_pit_stops_file",
+					"baseParameters": {
+						"p_data_source": {
+							"value": "@variables('v_data_source')",
+							"type": "Expression"
+						},
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"p_window_end_date": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"v_data_source": {
+				"type": "String",
+				"defaultValue": "testing"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-03-19T01:16:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
