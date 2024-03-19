@@ -15,6 +15,12 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_transform_formula1_data",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
