@@ -10,10 +10,7 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"p_window_end_date": {
-						"value": "@pipeline().parameters.p_window_end_date",
-						"type": "Expression"
-					}
+					"p_window_end_date": "2021-03-21"
 				}
 			},
 			{
