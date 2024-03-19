@@ -1,8 +1,8 @@
 {
-	"name": "tr_process_formula_data2",
+	"name": "tr_process_formula_data",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
