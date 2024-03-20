@@ -1,9 +1,0 @@
-{
-	"name": "databricks-course-adf612",
-	"location": "germanywestcentral",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "eb230aae-d435-4731-9797-54a917c86ac9",
-		"tenantId": "9718b564-5f5f-4b21-9850-1ecb2f2015a3"
-	}
-}
